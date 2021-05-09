@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router';
-import { getDocBySlug } from '../../lib/docs';
-import markdownToHtml from '../../lib/markdown';
+import { getDocBySlug } from '@lib/docs';
+import markdownToHtml from '@lib/markdown';
 import styles from './styles.module.scss';
 
 function BlogPage() {
   const [content, setContent] = useState('');
   const params: any = useParams();
-  console.log(params);
   const { meta, content: rawContent } = getDocBySlug(params.slug);
 
   const blogLd = {

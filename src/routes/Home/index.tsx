@@ -1,9 +1,9 @@
 import React from 'react';
 import { GitHub, Twitter, Linkedin } from 'react-feather';
 import { Link } from 'react-router-dom';
-import { getAllDocs } from '../../lib/docs';
+import type { Doc } from '@interfaces/docs';
+import { getAllDocs } from '@lib/docs';
 import styles from './styles.module.scss';
-import type { Doc } from '../../interfaces/docs';
 
 const docs = getAllDocs();
 

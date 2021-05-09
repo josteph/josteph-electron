@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   extends: 'erb',
   rules: {
@@ -13,10 +15,11 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      // See https://github.com/benmosher/eslint-plugin-import/issues/1396#issuecomment-575727774 for line below
-      node: {},
+      node: {
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+      },
       webpack: {
-        config: require.resolve('./.erb/configs/webpack.config.eslint.js'),
+        config: path.resolve(__dirname, './src/resolver/import.resolver.js'),
       },
     },
     'import/parsers': {

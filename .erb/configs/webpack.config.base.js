@@ -5,6 +5,9 @@
 import path from 'path';
 import webpack from 'webpack';
 import { dependencies as externals } from '../../src/package.json';
+import appRootDir from 'app-root-dir';
+
+const webpackAlias = require(`../../src/resolver`)({ rootDir: appRootDir.get() });
 
 export default {
   externals: [...Object.keys(externals || {})],
@@ -36,6 +39,7 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: [path.join(__dirname, '../../src'), 'node_modules'],
+    alias: webpackAlias,
   },
 
   plugins: [
