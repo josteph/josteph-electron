@@ -1,51 +1,41 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import icon from '../assets/icon.svg';
-import './App.global.css';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import Routes from './routes';
+import './App.global.scss';
 
-const Hello = () => {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
+const APP_NAME = 'Joshua Stephen';
+const APP_DESCRIPTION =
+  'A web developer passionate about javascript all around the web.';
+
+const websiteLd = {
+  '@context': 'http://schema.org',
+  '@type': 'WebSite',
+  url: 'https://josteph.github.io/',
 };
 
-export default function App() {
+function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
-    </Router>
+    <HelmetProvider>
+      <Helmet>
+        <title>{APP_NAME}</title>
+        <meta name="application-name" content={APP_NAME} />
+        <meta name="description" content={APP_DESCRIPTION} />
+        <meta property="og:title" content={APP_NAME} />
+        <meta property="og:description" content={APP_DESCRIPTION} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="jostephhh" />
+        <meta property="og:url" content="https://josteph.github.io" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@jostephhh" />
+        <meta name="twitter:creator" content="@jostephhh" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
+        />
+      </Helmet>
+      <Routes />
+    </HelmetProvider>
   );
 }
+
+export default App;

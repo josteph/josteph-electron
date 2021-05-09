@@ -55,6 +55,12 @@ export default merge(baseConfig, {
   module: {
     rules: [
       {
+        test: /node_modules[\/\\](iconv-lite)[\/\\].+/,
+        resolve: {
+          aliasFields: ['main']
+        }
+      },
+      {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: [
