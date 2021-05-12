@@ -2,10 +2,10 @@ import React from 'react';
 import { GitHub, Twitter, Linkedin } from 'react-feather';
 import { Link } from 'react-router-dom';
 import type { Doc } from '@interfaces/docs';
-import { getAllDocs } from '@lib/docs';
+import { getAllBlogs } from '@lib/docs';
 import styles from './styles.module.scss';
 
-const docs = getAllDocs();
+const docs = getAllBlogs();
 
 const HomePage = () => {
   return (
