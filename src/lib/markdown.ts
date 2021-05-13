@@ -7,7 +7,13 @@ import autolink from 'remark-autolink-headings';
 import hint from 'remark-hint';
 import externalLinks from 'remark-external-links';
 
-export default async function markdownToHtml(markdown: string) {
+const markdownCache = new Map();
+
+export default async function markdownToHtml(key: string, markdown: string) {
+  if (markdownCache.has(key)) {
+    return markdownCache.get(key);
+  }
+
   const result = await remark()
     .use(slug)
     .use(toc)
@@ -26,5 +32,11 @@ export default async function markdownToHtml(markdown: string) {
     .use(prism)
     .process(markdown);
 
-  return result.toString();
+  const finalStr = result.toString();
+
+  if (finalStr) {
+    markdownCache.set(key, finalStr);
+  }
+
+  return finalStr;
 }

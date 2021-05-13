@@ -7,12 +7,6 @@ const APP_NAME = 'Joshua Stephen';
 const APP_DESCRIPTION =
   'A web developer passionate about javascript all around the web.';
 
-const websiteLd = {
-  '@context': 'http://schema.org',
-  '@type': 'WebSite',
-  url: 'https://josteph.github.io/',
-};
-
 function App() {
   return (
     <HelmetProvider>
@@ -28,10 +22,6 @@ function App() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@jostephhh" />
         <meta name="twitter:creator" content="@jostephhh" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
-        />
       </Helmet>
       <Routes />
     </HelmetProvider>
