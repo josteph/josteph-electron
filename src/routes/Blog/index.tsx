@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router';
-import log from 'electron-log';
 import { getDocBySlug } from '@lib/docs';
 import markdownToHtml from '@lib/markdown';
 import styles from './styles.module.scss';
 import './prism.css';
 
 function BlogPage() {
-  const [content, setContent] = useState('');
   const params: any = useParams();
-  const { meta, content: rawContent } = getDocBySlug(params.slug);
-
-  useEffect(() => {
-    process.noAsar = true;
-
-    markdownToHtml(params.slug, rawContent)
-      .then((c: string) => setContent(c))
-      .catch((e: Error) => log.error(e));
-
-    return () => {
-      process.noAsar = false;
-    };
-  }, [rawContent]);
+  const { meta } = getDocBySlug(params.slug);
+  const content = markdownToHtml(params.slug);
 
   return (
     <>

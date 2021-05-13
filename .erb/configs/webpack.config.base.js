@@ -6,6 +6,13 @@ import path from 'path';
 import webpack from 'webpack';
 import { dependencies as externals } from '../../src/package.json';
 import appRootDir from 'app-root-dir';
+import html from 'remark-html';
+import prism from 'remark-prism';
+import slug from 'remark-slug';
+import toc from 'remark-toc';
+import autolink from 'remark-autolink-headings';
+import hint from 'remark-hint';
+import externalLinks from 'remark-external-links';
 
 const webpackAlias = require(`../../src/resolver`)({ rootDir: appRootDir.get() });
 
@@ -23,6 +30,41 @@ export default {
             cacheDirectory: true,
           },
         },
+      },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: "html-loader",
+          },
+          {
+            loader: "remark-loader",
+            options: {
+              remarkOptions: {
+                plugins: [
+                  slug,
+                  toc,
+                  [
+                    autolink,
+                    {
+                      behavior: 'append',
+                      content: {
+                        type: 'element',
+                        tagName: 'span',
+                        properties: { className: ['icon', 'icon-link'] },
+                        children: [{ type: 'text', value: '🔗' }],
+                      },
+                    }
+                  ],
+                  hint,
+                  externalLinks,
+                  html,
+                  prism,
+                ],
+              },
+            },
+          },
+        ],
       },
     ],
   },

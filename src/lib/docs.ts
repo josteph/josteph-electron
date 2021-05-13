@@ -5,11 +5,9 @@ import type { Blog } from '@interfaces/blogs';
 let matter;
 let searchEngine;
 
-const docsDirectory = join(__dirname, 'blogs');
-
 export function getDocBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, '');
-  const fullPath = join(docsDirectory, `${realSlug}.md`);
+  const fullPath = join(join(__dirname, 'blogs'), `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   if (!matter) {
@@ -22,7 +20,9 @@ export function getDocBySlug(slug: string) {
 }
 
 export function getAllBlogs(): Blog[] {
-  const slugs = fs.readdirSync(docsDirectory);
+  const slugs = fs
+    .readdirSync(join(__dirname, 'blogs'))
+    .filter((slug) => slug !== 'index.ts');
   const docs = slugs.map((slug) => getDocBySlug(slug));
 
   return docs;
