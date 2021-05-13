@@ -1,11 +1,11 @@
 import fs from 'fs';
 import { join } from 'path';
-import type { Doc } from '@interfaces/docs';
+import type { Blog } from '@interfaces/blogs';
 
 let matter;
 let searchEngine;
 
-const docsDirectory = join(process.cwd(), 'src', 'docs');
+const docsDirectory = join(__dirname, 'blogs');
 
 export function getDocBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, '');
@@ -21,7 +21,7 @@ export function getDocBySlug(slug: string) {
   return { slug: realSlug, meta: data, content };
 }
 
-export function getAllBlogs(): Doc[] {
+export function getAllBlogs(): Blog[] {
   const slugs = fs.readdirSync(docsDirectory);
   const docs = slugs.map((slug) => getDocBySlug(slug));
 

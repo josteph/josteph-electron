@@ -33,6 +33,7 @@
     "productName": "Josteph",
     "appId": "org.erb.Josteph",
     "files": [
+      "blogs/",
       "dist/",
       "node_modules/",
       "index.html",

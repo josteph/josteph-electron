@@ -1,7 +1,7 @@
 import React from 'react';
 import { GitHub, Twitter, Linkedin } from 'react-feather';
 import { Link } from 'react-router-dom';
-import type { Doc } from '@interfaces/docs';
+import type { Blog } from '@interfaces/blogs';
 import { getAllBlogs } from '@lib/docs';
 import styles from './styles.module.scss';
 
@@ -79,7 +79,7 @@ const HomePage = () => {
       <section className={styles.styBlogInfo}>
         <h2>Blog</h2>
 
-        {docs.map((doc: Doc) => (
+        {docs.map((doc: Blog) => (
           <div className={styles.styBlogDisplay} key={doc.slug}>
             <h3>
               <Link to={`/blog/${doc.slug}`} className="ani-link color-normal">

@@ -1,6 +1,6 @@
 export type Meta = { [key: string]: string };
 
-export type Doc = {
+export type Blog = {
   slug: string;
   meta: Meta;
   content: string;
