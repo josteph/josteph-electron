@@ -2,7 +2,7 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
-:root {
+[data-theme='dark'] {
   --body-bg-color: #1e1e24;
   --body-text-color: #e0e0e0;
   --body-link-color: #3d99be;
@@ -14,18 +14,16 @@
   );
 }
 
-@media (prefer-color-scheme: light) {
-  :root {
-    --body-bg-color: #fcfcfc;
-    --body-text-color: #1e1e24;
-    --body-link-color: #3d99be;
-    --primary-gradient: linear-gradient(
-      to right,
-      #3ab5b0 0%,
-      #3d99be 30%,
-      #8b56bf 100%
-    );
-  }
+[data-theme='light'] {
+  --body-bg-color: #fcfcfc;
+  --body-text-color: #1e1e24;
+  --body-link-color: #3d99be;
+  --primary-gradient: linear-gradient(
+    to right,
+    #3ab5b0 0%,
+    #3d99be 30%,
+    #8b56bf 100%
+  );
 }
 
 html,

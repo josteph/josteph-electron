@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Routes from './routes';
 import './App.global.scss';
@@ -8,6 +8,20 @@ const APP_DESCRIPTION =
   'A web developer passionate about javascript all around the web.';
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    if (window.matchMedia) {
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+      setTheme(mql.matches ? 'dark' : 'light');
+
+      mql.addEventListener('change', (event) => {
+        setTheme(event.matches ? 'dark' : 'light');
+      });
+    }
+  }, []);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -22,6 +36,7 @@ function App() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@jostephhh" />
         <meta name="twitter:creator" content="@jostephhh" />
+        <body data-theme={theme} />
       </Helmet>
       <Routes />
     </HelmetProvider>
