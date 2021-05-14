@@ -11,15 +11,25 @@ function App() {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
+    let mql: MediaQueryList;
+
+    const handler = (event: MediaQueryListEvent | MediaQueryList) => {
+      setTheme(event.matches ? 'dark' : 'light');
+    };
+
     if (window.matchMedia) {
-      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      mql = window.matchMedia('(prefers-color-scheme: dark)');
 
-      setTheme(mql.matches ? 'dark' : 'light');
+      handler(mql);
 
-      mql.addEventListener('change', (event) => {
-        setTheme(event.matches ? 'dark' : 'light');
-      });
+      mql.addEventListener('change', handler);
     }
+
+    return () => {
+      if (mql) {
+        mql.removeEventListener('change', handler);
+      }
+    };
   }, []);
 
   return (
